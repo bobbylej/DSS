@@ -1,0 +1,20 @@
+<h1>Projects:</h1>
+<div ng-repeat="projectByDay in projectsToFilter(projects) | filter:filterGroups">
+    <b>{{ projectByDay.date }}</b>
+    <li ng-repeat="project in projects | filter:{ date: projectByDay.date }">
+      <a href="/#/project/{{ project.id }}">{{ project.name }}</a>, ({{ project.user.name }})
+      <div class="" ng-if="isProjectOfUser(project)">
+          <button type="button" name="button" ng-click="removeProject(project)">x</button>
+      </div>
+    </li>
+</div>
+<h2 ng-show="!projects.length">No projects here.</h2>
+{{ error }}
+<form class="" name="projectForm" ng-submit="createProject(project)" ng-if="isUserPM()">
+  <label for="name">Project:</label>
+  <input type="text" ng-model="project.name" name="name" required>
+  <label for="date">Date:</label>
+  <input type="date" ng-model="project.date" name="date">
+  <input type="submit" value="Create Project" ng-disabled="projectForm.$invalid">
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>

@@ -1,0 +1,36 @@
+<h1>Project {{ project.name }}</h1>
+<p>
+  {{ project.user.name }}
+</p>
+<p>
+  {{ project.date }}
+</p>
+<div class="employee-container">
+  <h2>Employees:</h2>
+  <span>{{ errorEmployee }}</span>
+  <ul>
+    <li ng-repeat="employee in employees">{{ employee.user.name }} - {{ employee.user.type }}
+      <button type="button" name="button" ng-click="removeEmployee(employee.user)" ng-if="isProjectOfUser()">x</button>
+    </li>
+  </ul>
+  <ul>
+    <li ng-repeat="user in users">{{ user.name }} - {{ user.type }}
+      <button type="button" name="button" ng-click="addEmployee(user)" ng-if="isProjectOfUser()">+</button>
+    </li>
+  </ul>
+</div>
+<div class="task-container">
+  <h2>Tasks:</h2>
+  <span>{{ errorTask }}</span>
+  <ul>
+    <li ng-repeat="task in tasks">{{ task.name }} - {{ task.user.name }}
+      <button type="button" name="button" ng-click="removeTask(task)" ng-if="isProjectOfUser()">x</button>
+    </li>
+  </ul>
+  <form class="" name="taskForm" ng-submit="createTask(task)" ng-if="isProjectOfUser()">
+    <label for="name">Name:</label>
+    <input type="text" ng-model="task.name" name="name" required>
+    <input type="submit" value="Create Task" ng-disabled="taskForm.$invalid">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+  </form>
+</div>
