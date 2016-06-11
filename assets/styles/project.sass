@@ -1,0 +1,25 @@
+$point-size: 50px
+
+.figure
+	position: relative
+	margin: 0
+
+	.point
+		position: absolute
+		width: $point-size
+		height: $point-size
+		margin: 0
+		//margin-left: -$point-size/2
+		//margin-top: -$point-size/2
+		background-color: #000
+		border-radius: $point-size/2
+		box-sizing: border-box
+
+		&.center
+			left: 50%
+			top: 50%
+			background: none
+
+		&.dragable
+			background-color: red
+			opacity: 0.5

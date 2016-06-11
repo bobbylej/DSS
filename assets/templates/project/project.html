@@ -5,7 +5,7 @@
 <p>
   {{ project.date }}
 </p>
-<div class="employee-container">
+<div class="employee-container" ng-show="currentStep === 1">
   <h2>Employees:</h2>
   <span>{{ errorEmployee }}</span>
   <ul>
@@ -19,7 +19,11 @@
     </li>
   </ul>
 </div>
-<div class="task-container">
+<div class="employee-criteria-container">
+  <h3>Choose which decision should be more important</h3>
+  <div class="employee-criteria" id="employee-criteria"></div>
+</div>
+<div class="task-container" ng-show="currentStep === 3">
   <h2>Tasks:</h2>
   <span>{{ errorTask }}</span>
   <ul>
@@ -33,4 +37,8 @@
     <input type="submit" value="Create Task" ng-disabled="taskForm.$invalid">
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />
   </form>
+</div>
+<div class="buttons">
+  <button type="button" class="button" name="next" ng-click="prevStep()"  ng-show="currentStep > 0">previous</button>
+  <button type="button" class="button" name="next" ng-click="nextStep()">next</button>
 </div>

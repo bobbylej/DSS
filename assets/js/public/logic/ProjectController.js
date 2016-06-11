@@ -1,5 +1,14 @@
 WebModule.controller('ProjectController', ['$scope', '$http', '$sessionStorage', '$routeParams', 'usefulService', function($scope, $http, $sessionStorage, $routeParams, usefulService) {
 
+	$scope.currentStep = 0;
+	$scope.prevStep = () => {
+		if($scope.currentStep > 0)
+			$scope.currentStep--;
+	}
+	$scope.nextStep = () => {
+		$scope.currentStep++;
+	}
+
 	$scope.removeProject = (project) => {
 		$http.post('/api/project/'+project.id+'/remove', {
 			user: $sessionStorage.user.id
@@ -236,5 +245,13 @@ WebModule.controller('ProjectController', ['$scope', '$http', '$sessionStorage',
 		}
 		$scope.users = users;
 	});
+
+	//jQuery
+
+	(function( $ ) {
+
+		$('#employee-criteria').graph(5, 200);
+
+	}( jQuery ));
 
 }]);
